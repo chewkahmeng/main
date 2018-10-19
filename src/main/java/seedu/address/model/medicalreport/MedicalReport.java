@@ -10,10 +10,10 @@ import java.util.Objects;
 public class MedicalReport {
 
     private final Title title;
-    private final Date date;
+    private final ReportDate date;
     private final Information information;
 
-    public MedicalReport(Title title, Date date, Information information) {
+    public MedicalReport(Title title, ReportDate date, Information information) {
         requireAllNonNull(title, date, information);
         this.title = title;
         this.date = date;
@@ -24,7 +24,7 @@ public class MedicalReport {
         return title;
     }
 
-    public Date getDate() {
+    public ReportDate getDate() {
         return date;
     }
 

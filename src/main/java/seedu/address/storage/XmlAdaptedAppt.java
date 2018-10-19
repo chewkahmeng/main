@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.timetable.Appt;
@@ -18,15 +18,15 @@ public class XmlAdaptedAppt {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appt's %s field is missing!";
 
-    @XmlValue
+    @XmlElement
     private String apptStart;
-    @XmlValue
+    @XmlElement
     private String apptEnd;
-    @XmlValue
+    @XmlElement
     private String apptVenue;
-    @XmlValue
+    @XmlElement
     private String apptInfo;
-    @XmlValue
+    @XmlElement
     private String apptDrName;
 
     /**
@@ -66,27 +66,32 @@ public class XmlAdaptedAppt {
      */
     public Appt toModelType() throws IllegalValueException {
         if (apptStart == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApptDateTime.class.getSimpleName()));
         }
         final ApptDateTime modelApptStart = new ApptDateTime(apptStart);
 
         if (apptEnd == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApptDateTime.class.getSimpleName()));
         }
         final ApptDateTime modelApptEnd = new ApptDateTime(apptEnd);
 
         if (apptVenue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApptVenue.class.getSimpleName()));
         }
         final ApptVenue modelApptVenue = new ApptVenue(apptVenue);
 
         if (apptInfo == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApptInfo.class.getSimpleName()));
         }
         final ApptInfo modelApptInfo = new ApptInfo(apptInfo);
 
         if (apptDrName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApptDrName.class.getSimpleName()));
         }
         final ApptDrName modelApptDrName = new ApptDrName(apptDrName);
 

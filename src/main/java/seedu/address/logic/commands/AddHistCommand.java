@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HISTORY_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HISTORY_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -52,9 +54,17 @@ public class AddHistCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<MedHistory> fullMedHistories = personToEdit.getMedHistory();
+        Set<MedHistory> newMedHistories = new HashSet<>();
+        // for loop overwrites all existing history with itself
+        for (MedHistory medHistory : fullMedHistories) {
+            newMedHistories.add(medHistory);
+        }
+        // adds the new history from command
+        newMedHistories.add(medHistory);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getMedicalReport(), medHistory, personToEdit.getAppt(),
-                personToEdit.getNric(), personToEdit.getTags());
+                personToEdit.getAddress(), personToEdit.getMedicalReports(), newMedHistories, personToEdit.getAppts(),
+                personToEdit.getNric(), personToEdit.getDateOfBirth(), personToEdit.getTags());
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
@@ -66,9 +76,7 @@ public class AddHistCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !medHistory.toString().isEmpty() ? MESSAGE_ADD_MEDHISTORY_SUCCESS
-                : MESSAGE_DELETE_MEDHISTORY_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ADD_MEDHISTORY_SUCCESS, personToEdit);
     }
 
     @Override

@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -65,9 +67,15 @@ public class AddApptCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<Appt> oldAppts = personToEdit.getAppts();
+        Set<Appt> newAppts = new HashSet<>();
+        for (Appt appt : oldAppts) {
+            newAppts.add(appt);
+        }
+        newAppts.add(appt);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getMedicalReport(), personToEdit.getMedHistory(), appt,
-                personToEdit.getNric(), personToEdit.getTags());
+                personToEdit.getAddress(), personToEdit.getMedicalReports(), personToEdit.getMedHistory(), newAppts,
+                personToEdit.getNric(), personToEdit.getDateOfBirth(), personToEdit.getTags());
 
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -77,12 +85,11 @@ public class AddApptCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether the appt is added to or removed from
+     * Generates a command execution success message when the appt is added to
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !appt.toString().isEmpty() ? MESSAGE_ADD_APPT_SUCCESS : MESSAGE_DELETE_APPT_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ADD_APPT_SUCCESS, personToEdit);
     }
 
     @Override

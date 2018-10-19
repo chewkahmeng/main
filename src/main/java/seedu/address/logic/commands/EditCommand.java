@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.medhistory.MedHistory;
 import seedu.address.model.medicalreport.MedicalReport;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
@@ -104,15 +105,15 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
 
-        MedicalReport updatedReport = personToEdit.getMedicalReport(); // edit command does not edit MedicalReport now
-        MedHistory updatedMedHistory = personToEdit.getMedHistory(); // edit command does not edit MedHistory now
-        Appt updatedAppt = personToEdit.getAppt(); // edit command does not allow editing appts
+        Set<MedicalReport> updatedReports = personToEdit.getMedicalReports(); // edit command disallow editing reports
+        Set<MedHistory> updatedMedHistory = personToEdit.getMedHistory(); // edit command does not edit MedHistory now
+        Set<Appt> updatedAppts = personToEdit.getAppts(); // edit command does not allow editing appts
         Nric updatedNric = personToEdit.getNric();
+        DateOfBirth updatedDateOfBirth = personToEdit.getDateOfBirth();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedReport,
-                          updatedMedHistory, updatedAppt, updatedNric, updatedTags);
-
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedReports,
+                          updatedMedHistory, updatedAppts, updatedNric, updatedDateOfBirth, updatedTags);
     }
 
     @Override

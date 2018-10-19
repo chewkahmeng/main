@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -31,11 +33,10 @@ public class AddMedicalReportCommand extends Command {
             + PREFIX_INFORMATION + "[INFORMATION]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TITLE + "Asthma "
-            + PREFIX_DATE + "01012018 "
-            + PREFIX_INFORMATION + "prescribed XXX medicine, next appointment on 02022018. ";
+            + PREFIX_DATE + "01/01/2018 "
+            + PREFIX_INFORMATION + "prescribed XXX medicine, next appointment on 02/02/2018. ";
 
     public static final String MESSAGE_ADD_REPORT_SUCCESS = "Added medical report to Person: %1$s";
-    public static final String MESSAGE_DELETE_REPORT_SUCCESS = "Removed medical report from Person: %1$s";
 
     private final Index index;
     private final MedicalReport report;
@@ -61,9 +62,15 @@ public class AddMedicalReportCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<MedicalReport> oldReports = personToEdit.getMedicalReports();
+        Set<MedicalReport> newReports = new HashSet<>();
+        for (MedicalReport report : oldReports) {
+            newReports.add(report);
+        }
+        newReports.add(report);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), report, personToEdit.getMedHistory(), personToEdit.getAppt(),
-                personToEdit.getNric(), personToEdit.getTags());
+                personToEdit.getAddress(), newReports, personToEdit.getMedHistory(), personToEdit.getAppts(),
+                personToEdit.getNric(), personToEdit.getDateOfBirth(), personToEdit.getTags());
 
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -73,8 +80,7 @@ public class AddMedicalReportCommand extends Command {
     }
 
     private String generateSuccessMessage(Person personToEdit) {
-        String message = (!report.toString().isEmpty()) ? MESSAGE_ADD_REPORT_SUCCESS : MESSAGE_DELETE_REPORT_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_ADD_REPORT_SUCCESS, personToEdit);
     }
 
     @Override

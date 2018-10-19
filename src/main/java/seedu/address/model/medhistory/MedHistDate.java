@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 public class MedHistDate {
 
     public static final String MESSAGE_MEDHISTDATE_CONSTRAINTS =
-            "Date needs to be in day/month/year (dd/mm/yyyy) format.";
+            "ReportDate needs to be in day/month/year (dd/mm/yyyy) format.";
 
     public static final String MEDHISTDATE_VALIDATION_REGEX = "[^\\s].*";
 

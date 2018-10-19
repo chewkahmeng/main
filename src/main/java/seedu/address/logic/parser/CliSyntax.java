@@ -13,7 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Prefix definitions for Medical Report */
-    //public static final Prefix PREFIX_MEDICAL_REPORT = new Prefix("mr/");
     public static final Prefix PREFIX_INFORMATION = new Prefix("i/");
     public static final Prefix PREFIX_TITLE = new Prefix("t/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");

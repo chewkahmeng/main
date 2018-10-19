@@ -32,9 +32,10 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="nric" styleClass="cell_small_label" text="\$nric" />
-      <Label fx:id="medicalreport" styleClass="cell_small_label" text="\$medicalreport" />
-      <Label fx:id="medhistory" styleClass="cell_small_label" text="\$medhistory" />
-      <Label fx:id="appt" styleClass="cell_small_label" text="\$appt" />
+      <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
+      <FlowPane fx:id="reports" />
+      <FlowPane fx:id="medHistories" />
+      <FlowPane fx:id="appts" />
     </VBox>
   </GridPane>
 </HBox>

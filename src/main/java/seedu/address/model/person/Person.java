@@ -25,28 +25,30 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final MedHistory medhistory;
-    private final Appt appt;
+    private final Set<MedHistory> medHistories = new HashSet<>();
+    private final Set<Appt> appts = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
-    private final MedicalReport report;
+    private final Set<MedicalReport> reports = new HashSet<>();
 
     // Additional information fields
     private final Nric nric;
+    private final DateOfBirth dateOfBirth;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, MedicalReport report,
-                  MedHistory medhistory, Appt appt, Nric nric, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<MedicalReport> reports,
+                   Set<MedHistory> medHistories, Set<Appt> appts, Nric nric, DateOfBirth dateOfBirth, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.nric = nric;
-        this.report = report;
-        this.medhistory = medhistory;
-        this.appt = appt;
+        this.dateOfBirth = dateOfBirth;
+        this.reports.addAll(reports);
+        this.medHistories.addAll(medHistories);
+        this.appts.addAll(appts);
         this.tags.addAll(tags);
     }
 
@@ -66,20 +68,24 @@ public class Person {
         return address;
     }
 
-    public MedicalReport getMedicalReport() {
-        return report;
+    public Set<MedicalReport> getMedicalReports() {
+        return Collections.unmodifiableSet(reports);
     }
 
-    public MedHistory getMedHistory() {
-        return medhistory;
+    public Set<MedHistory> getMedHistory() {
+        return Collections.unmodifiableSet(medHistories);
     }
 
     public Nric getNric() {
         return nric;
     }
 
-    public Appt getAppt() {
-        return appt;
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Set<Appt> getAppts() {
+        return Collections.unmodifiableSet(appts);
     }
 
     /**

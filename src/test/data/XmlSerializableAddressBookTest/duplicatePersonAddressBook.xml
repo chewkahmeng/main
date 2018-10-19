@@ -7,6 +7,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <nric></nric>
+        <dateOfBirth>01-01-1970</dateOfBirth>
         <title></title>
         <date></date>
         <information></information>
@@ -28,6 +29,7 @@
         <email>pauline@example.com</email>
         <address>4th street</address>
         <nric></nric>
+        <dateOfBirth>01-01-1970</dateOfBirth>
         <title></title>
         <date></date>
         <information></information>

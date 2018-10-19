@@ -6,10 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents a Medical Report's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class ReportDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "The full Date should be of the format: DD/MM/YYYY";
+            "The full ReportDate should be of the format: DD/MM/YYYY";
 
     /*
      * The first character of the date must not be a whitespace,
@@ -20,11 +20,11 @@ public class Date {
     public final String fullDate;
 
     /**
-     * Constructs a {@code Date}.
+     * Constructs a {@code ReportDate}.
      *
      * @param date A valid date.
      */
-    public Date(String date) {
+    public ReportDate(String date) {
         requireNonNull(date);
         fullDate = date;
     }
@@ -45,8 +45,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && fullDate.equals(((Date) other).fullDate)); // state check
+                || (other instanceof ReportDate // instanceof handles nulls
+                && fullDate.equals(((ReportDate) other).fullDate)); // state check
     }
 
     @Override

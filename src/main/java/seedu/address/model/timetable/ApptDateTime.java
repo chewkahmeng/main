@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class ApptDateTime {
-    public static final String MESSAGE_NAME_CONSTRAINTS = "The full Date and Time should be of the format: "
+    public static final String MESSAGE_NAME_CONSTRAINTS = "The full ReportDate and Time should be of the format: "
             + "DD/MM/YYYY HH:MM.";
 
     public final String value;

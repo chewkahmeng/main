@@ -1,25 +1,29 @@
 package seedu.address.testutil;
 
-import seedu.address.model.medicalreport.Date;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INFO1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE1;
+
 import seedu.address.model.medicalreport.Information;
 import seedu.address.model.medicalreport.MedicalReport;
+import seedu.address.model.medicalreport.ReportDate;
 import seedu.address.model.medicalreport.Title;
 
 /**
  * A utility class to help with building Report objects.
  */
 public class ReportBuilder {
-    public static final String DEFAULT_TITLE = "Asthma";
-    public static final String DEFAULT_DATE = "01/01/2018";
-    public static final String DEFAULT_INFO = "Prescribed XXX medicine, next appointment on 02022018";
+    public static final String DEFAULT_TITLE = VALID_TITLE1;
+    public static final String DEFAULT_DATE = VALID_DATE1;
+    public static final String DEFAULT_INFO = VALID_INFO1;
 
     private Title title;
-    private Date date;
+    private ReportDate date;
     private Information information;
 
     public ReportBuilder() {
         title = new Title(DEFAULT_TITLE);
-        date = new Date(DEFAULT_DATE);
+        date = new ReportDate(DEFAULT_DATE);
         information = new Information(DEFAULT_INFO);
     }
     /**
@@ -38,10 +42,10 @@ public class ReportBuilder {
         return this;
     }
     /**
-     * Sets the {@code Date} of the {@code MedicalReport} that we are building.
+     * Sets the {@code ReportDate} of the {@code MedicalReport} that we are building.
      */
     public ReportBuilder withDate(String date) {
-        this.date = new Date(date);
+        this.date = new ReportDate(date);
         return this;
     }
     /**
